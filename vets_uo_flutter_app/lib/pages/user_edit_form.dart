@@ -73,8 +73,11 @@ class StateUserEditForm extends State<UserEditForm> {
                 border: OutlineInputBorder(),
               ),
               validator: (value) {
+                final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                 if (value == null || value.isEmpty) {
                   return 'por favor digite el email';
+                } else if (!emailRegExp.hasMatch(value)) {
+                  return 'Introduce un formato de email válido';
                 }
                 return null;
               },
@@ -90,8 +93,11 @@ class StateUserEditForm extends State<UserEditForm> {
                 border: OutlineInputBorder(),
               ),
               validator: (value) {
+                final phoneRegExp = RegExp(r'^\d{3}-\d{3}-\d{3}-\d{3}$');
                 if (value == null || value.isEmpty) {
                   return 'por favor digite el telefono ';
+                } else if (!phoneRegExp.hasMatch(value)) {
+                  return 'El formato debe ser 999-999-999-999';
                 }
                 return null;
               },

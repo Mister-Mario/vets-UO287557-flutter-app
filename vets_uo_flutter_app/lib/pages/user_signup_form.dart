@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vets_uo_flutter_app/src/user.dart';
+import 'package:vets_uo_flutter_app/validators/user_validator.dart';
 
 // Create a Form widget.
 class UserSignUpForm extends StatefulWidget {
@@ -32,12 +33,7 @@ class UserSignUpFormState extends State<UserSignUpForm> {
                 border: OutlineInputBorder(),
               ),
               // The validator receives the text that the user has entered.
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'por favor digite el nombre';
-                }
-                return null;
-              },
+              validator: (value) => UserValidator.validateName(value),
               onSaved: (value) => _name = value ?? '',
             ),
 
@@ -48,12 +44,7 @@ class UserSignUpFormState extends State<UserSignUpForm> {
                 hintText: 'Introduce tus apellidos',
                 border: OutlineInputBorder(),
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'por favor digite los apellidos';
-                }
-                return null;
-              },
+              validator: (value) => UserValidator.validateSurname(value),
               onSaved: (value) {
                 _surname = value ?? '';
               },
@@ -66,15 +57,7 @@ class UserSignUpFormState extends State<UserSignUpForm> {
                 hintText: 'Introduce tu email',
                 border: OutlineInputBorder(),
               ),
-              validator: (value) {
-                final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                if (value == null || value.isEmpty) {
-                  return 'por favor digite el email';
-                } else if (!emailRegExp.hasMatch(value)) {
-                  return 'Introduce un formato de email válido';
-                }
-                return null;
-              },
+              validator: (value) => UserValidator.validateEmail(value),
               onSaved: (value) {
                 _email = value ?? '';
               },
@@ -87,15 +70,7 @@ class UserSignUpFormState extends State<UserSignUpForm> {
                 hintText: 'Introduce tu email',
                 border: OutlineInputBorder(),
               ),
-              validator: (value) {
-                final phoneRegExp = RegExp(r'^\d{3}-\d{3}-\d{3}-\d{3}$');
-                if (value == null || value.isEmpty) {
-                  return 'por favor digite el telefono ';
-                } else if (!phoneRegExp.hasMatch(value)) {
-                  return 'El formato debe ser 999-999-999-999';
-                }
-                return null;
-              },
+              validator: (value) => UserValidator.validatePhone(value),
               onSaved: (value) {
                 _phone = value ?? '';
               },

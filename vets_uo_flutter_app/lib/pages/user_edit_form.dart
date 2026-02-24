@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vets_uo_flutter_app/src/user.dart';
+import 'package:vets_uo_flutter_app/validators/user_validator.dart';
 
 class UserEditForm extends StatefulWidget {
   final User user;
@@ -40,12 +41,7 @@ class StateUserEditForm extends State<UserEditForm> {
                 hintText: 'Introduce tu nombre',
                 border: OutlineInputBorder(),
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'por Favor digite el nombre';
-                }
-                return null;
-              },
+              validator: (value) => UserValidator.validateName(value),
               onSaved: (value) => nameController.text = value ?? '',
             ),
             TextFormField(
@@ -55,12 +51,7 @@ class StateUserEditForm extends State<UserEditForm> {
                 hintText: 'Introduce tu apellidos',
                 border: OutlineInputBorder(),
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'por favor digite los apellidos';
-                }
-                return null;
-              },
+              validator: (value) => UserValidator.validateSurname(value),
               onSaved: (value) {
                 surnameController.text = value ?? '';
               },
@@ -92,15 +83,7 @@ class StateUserEditForm extends State<UserEditForm> {
                 hintText: 'Introduce tu email',
                 border: OutlineInputBorder(),
               ),
-              validator: (value) {
-                final phoneRegExp = RegExp(r'^\d{3}-\d{3}-\d{3}-\d{3}$');
-                if (value == null || value.isEmpty) {
-                  return 'por favor digite el telefono ';
-                } else if (!phoneRegExp.hasMatch(value)) {
-                  return 'El formato debe ser 999-999-999-999';
-                }
-                return null;
-              },
+              validator: (value) => UserValidator.validatePhone(value),
               onSaved: (value) {
                 phoneController.text = value ?? '';
               },
